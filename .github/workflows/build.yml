@@ -17,7 +17,6 @@ jobs:
         run: |
           mkdir images
           export IMAGE_TAG=$(date +'%y%m%d%H%m')
-          export PYCHARM_VERSION=$(wget -qO- 'https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=pycharm-professional' | grep pkgver= | cut -d "=" -f2)
           echo ${{ secrets.GITHUB_TOKEN }} | singularity remote login -u ${{ secrets.GHCR_USERNAME }} --password-stdin oras://ghcr.io
         
           for def_file in container/*.def

@@ -2,11 +2,12 @@ Bootstrap: docker
 From: debian
 
 %post
-    echo $PYCHARM_VERSION
     apt update && apt -y full-upgrade
     DEBIAN_FRONTEND=noninteractive apt install -yq xfce4 dbus-x11 git wget procps xfce4-goodies firefox-esr build-essential python3-cairo python3-qtpy
+    export PYCHARM_VERSION=$(wget -qO- 'https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=pycharm-professional' | grep pkgver= | cut -d "=" -f2)
     wget -O /tmp/pycharm.tar.gz https://download.jetbrains.com/python/pycharm-professional-$PYCHARM_VERSION.tar.gz
     tar xzf /tmp/pycharm.tar.gz -C /opt/
+    mv /opt/pycharm-$PYCHARM_VERSION /opt/pycharm
     rm -rf /tmp/pycharm.tar.gz
     apt-get clean
     rm -rf /var/lib/apt/lists/*
