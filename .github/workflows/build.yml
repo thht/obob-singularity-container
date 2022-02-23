@@ -15,6 +15,7 @@ jobs:
 
       - name: Prepare
         run: |
+          source retry.sh
           mkdir images
           export IMAGE_TAG=$(date +'%y%m%d%H%m')
           echo ${{ secrets.GITHUB_TOKEN }} | singularity remote login -u ${{ secrets.GHCR_USERNAME }} --password-stdin oras://ghcr.io
@@ -23,6 +24,6 @@ jobs:
           do
               b_name="$(basename $def_file .def)"
               singularity build images/$b_name.sif $def_file
-              singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:latest
-              singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:$IMAGE_TAG
+              retry 4 singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:latest
+              retry 4 singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:$IMAGE_TAG
           done
