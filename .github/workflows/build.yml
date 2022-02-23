@@ -14,6 +14,8 @@ jobs:
       - name: Prepare
         run: |
           mkdir images
+          IMAGE_TAG=$(date +'%y%m%d%H%m')
+          export PYCHARM_VERSION=$(wget -qO- 'https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=pycharm-professional' | grep pkgver= | cut -d "=" -f2)
           echo ${{ secrets.GITHUB_TOKEN }} | singularity remote login -u ${{ secrets.GHCR_USERNAME }} --password-stdin oras://ghcr.io
         
           for def_file in container/*.def
@@ -21,4 +23,5 @@ jobs:
               b_name="$(basename $def_file .def)"
               singularity build images/$b_name.sif $def_file
               singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:latest
+              singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:$IMAGE_TAG
           done
