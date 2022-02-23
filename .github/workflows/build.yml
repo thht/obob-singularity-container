@@ -8,5 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     container: docker://quay.io/singularity/singularity:v3.9.4
     steps:
-      - name: Build it
-        run: echo "Hello"
+      - name: Prepare
+        run: |
+          mkdir images
+        
+          for def_file in container/*.def
+          do
+              b_name="$(basename $def_file .def)"
+              singularity build images/$b_name.sif $def_file
+          done
