@@ -14,9 +14,11 @@ jobs:
       - name: Prepare
         run: |
           mkdir images
+          echo ${{ secrets.GITHUB_TOKEN }} | singularity remote login -u ${{ secrets.GHCR_USERNAME }} --password-stdin oras://ghcr.io
         
           for def_file in container/*.def
           do
               b_name="$(basename $def_file .def)"
               singularity build images/$b_name.sif $def_file
+              singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:latest
           done
