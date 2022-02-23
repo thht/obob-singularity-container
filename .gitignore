@@ -3,7 +3,7 @@ images
 junit-results.xml
 *.pyc
 *.pyo
-*.sh
+
 *.so
 *.fif
 *.tar.gz

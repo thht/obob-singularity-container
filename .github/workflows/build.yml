@@ -15,7 +15,7 @@ jobs:
 
       - name: Prepare
         run: |
-          source retry.sh
+          source ./retry.sh
           mkdir images
           export IMAGE_TAG=$(date +'%y%m%d%H%m')
           echo ${{ secrets.GITHUB_TOKEN }} | singularity remote login -u ${{ secrets.GHCR_USERNAME }} --password-stdin oras://ghcr.io
