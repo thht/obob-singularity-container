@@ -6,7 +6,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: docker://quay.io/singularity/singularity:v3.9.4
+    container:
+      image: docker://quay.io/singularity/singularity:v3.9.4
+      options: --privileged
     steps:
       - name: Check out code for the container builds
         uses: actions/checkout@v2
