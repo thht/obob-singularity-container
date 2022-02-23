@@ -8,5 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build it
-        uses: docker://quay.io/singularity/singularity
         run: echo "Hello"
