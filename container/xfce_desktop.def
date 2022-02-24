@@ -20,7 +20,7 @@ From: debian
     wget -qO - https://research.cs.wisc.edu/htcondor/repo/keys/HTCondor-9.0-Key | apt-key add -
     echo "deb [arch=amd64] http://research.cs.wisc.edu/htcondor/repo/debian/9.0 bullseye main" > /etc/apt/sources.list.d/htcondor.list
     apt update
-    apt install -yq htcondor
+    apt install -yq -o Dpkg::Options::="--force-confold" htcondor
 
 
     # install pycharm
