@@ -33,5 +33,8 @@ From: debian
     # clean up
     apt-get clean
     rm -rf /var/lib/apt/lists/*
+
+    # set permissions for /var/run
+    chmod a+rwx /var/run
 %runscript
     dbus-launch xfce4-session
