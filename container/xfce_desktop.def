@@ -37,5 +37,7 @@ From: debian
 
     # set permissions for /var/run
     chmod a+rwx /var/run /run/user /var/run/user
-%runscript
+
+%apprun desktop
     dbus-launch xfce4-session
+
