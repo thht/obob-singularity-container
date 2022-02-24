@@ -18,7 +18,7 @@ From: debian
 
     # install htcondor
     wget -qO - https://research.cs.wisc.edu/htcondor/debian/HTCondor-Release.gpg.key | apt-key add -
-    echo "deb http://research.cs.wisc.edu/htcondor/debian/8.8/buster buster contrib" > /etc/apt/sources.list.d/htcondor.list
+    echo "deb [arch=amd64] http://research.cs.wisc.edu/htcondor/repo/debian/9.0 bullseye main" > /etc/apt/sources.list.d/htcondor.list
     apt update
     apt install -yq htcondor
 
