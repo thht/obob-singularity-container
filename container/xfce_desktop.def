@@ -1,14 +1,36 @@
 Bootstrap: docker
 From: debian
 
+%files
+    files/condor_config /etc/condor/condor_config
+
 %post
+    export DEBIAN_FRONTEND=noninteractive
     apt update && apt -y full-upgrade
-    DEBIAN_FRONTEND=noninteractive apt install -yq xfce4 dbus-x11 git wget procps xfce4-goodies firefox-esr build-essential python3-cairo python3-qtpy
+    # install xfce
+    apt install -yq xfce4 dbus-x11 git wget procps xfce4-goodies firefox-esr build-essential python3-cairo python3-qtpy gnupg2 software-properties-common apt-transport-https curl
+
+    # install vscode
+    curl -sSL https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+    add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    apt update
+    apt install -yq code
+
+    # install htcondor
+    wget -qO - https://research.cs.wisc.edu/htcondor/debian/HTCondor-Release.gpg.key | apt-key add -
+    echo "deb http://research.cs.wisc.edu/htcondor/debian/8.8/buster buster contrib" > /etc/apt/sources.list.d/htcondor.list
+    apt update
+    apt install -yq htcondor
+
+
+    # install pycharm
     export PYCHARM_VERSION=$(wget -qO- 'https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=pycharm-professional' | grep pkgver= | cut -d "=" -f2)
     wget -O /tmp/pycharm.tar.gz https://download.jetbrains.com/python/pycharm-professional-$PYCHARM_VERSION.tar.gz
     tar xzf /tmp/pycharm.tar.gz -C /opt/
     mv /opt/pycharm-$PYCHARM_VERSION /opt/pycharm
     rm -rf /tmp/pycharm.tar.gz
+
+    # clean up
     apt-get clean
     rm -rf /var/lib/apt/lists/*
 %runscript
