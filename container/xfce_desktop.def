@@ -35,6 +35,6 @@ From: debian
     rm -rf /var/lib/apt/lists/*
 
     # set permissions for /var/run
-    chmod a+rwx /var/run
+    chmod a+rwx /var/run /run/user /var/run/user
 %runscript
     dbus-launch xfce4-session
