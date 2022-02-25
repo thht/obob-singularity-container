@@ -2,7 +2,7 @@ Bootstrap: docker
 From: debian
 
 %environment
-    export THEANO_FLAGS='compile__timeout=1000,blas__ldflags="-lf77blas -latlas -lgfortran"'
+    export THEANO_FLAGS='compile__timeout=1000,blas__ldflags="-lopenblas"'
 
 %files
     files/condor_config /etc/condor/condor_config
