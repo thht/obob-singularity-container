@@ -37,6 +37,9 @@ From: debian
     # install antibody
     curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
 
+    # make sure python works
+    update-alternatives --install /usr/bin/python python /usr/bin/python3 1
+
     # clean up
     apt-get clean
     rm -rf /var/lib/apt/lists/*
