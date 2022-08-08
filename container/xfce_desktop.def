@@ -45,6 +45,9 @@ From: debian
     # make sure python works
     update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 
+    # install slurm
+    apt install -yq libmunge-dev libmunge2 munge slurm-wlm slurm-wlm-doc
+
     # clean up
     apt-get clean
     rm -rf /var/lib/apt/lists/*
