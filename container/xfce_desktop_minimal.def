@@ -1,0 +1,34 @@
+Bootstrap: docker
+From: debian
+
+%files
+    files/00-aliases.sh /etc/profile.d/00-aliases.sh
+
+%post
+    export DEBIAN_FRONTEND=noninteractive
+    apt update && apt -y full-upgrade
+    # install xfce
+    apt install -yq xfce4 dbus-x11 wget procps xfce4-goodies firefox-esr build-essential gnupg2 software-properties-common apt-transport-https curl vim sudo x11-apps zsh zsh-antigen ssh-askpass
+   
+    # install vscode
+    curl -sSL https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+    add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    apt update
+    apt install -yq code
+
+    # install antibody
+    curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
+
+    # make sure python works
+    update-alternatives --install /usr/bin/python python /usr/bin/python3 1
+
+    # clean up
+    apt-get clean
+    rm -rf /var/lib/apt/lists/*
+
+    # set permissions for /var/run
+    chmod a+rwx /var/run /run/user /var/run/user
+
+%apprun desktop
+    dbus-launch xfce4-session
+
