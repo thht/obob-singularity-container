@@ -8,13 +8,16 @@ From: debian
     export DEBIAN_FRONTEND=noninteractive
     apt update && apt -y full-upgrade
     # install xfce
-    apt install -yq xfce4 dbus-x11 wget procps xfce4-goodies firefox-esr gnupg2 software-properties-common apt-transport-https curl vim sudo x11-apps ssh-askpass git
+    apt install -yq xfce4 dbus-x11 wget procps xfce4-goodies firefox-esr gnupg2 software-properties-common apt-transport-https curl vim sudo x11-apps ssh-askpass git zsh zsh-antigen
    
-    # install vscode
-    curl -sSL https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-    add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-    apt update
-    apt install -yq code
+    # install antibody
+    curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
+
+    # make sure python works
+    update-alternatives --install /usr/bin/python python /usr/bin/python3 1
+
+    # install slurm
+    apt install -yq libmunge-dev libmunge2 munge slurm-wlm slurm-wlm-doc
 
     # make sure python works
     update-alternatives --install /usr/bin/python python /usr/bin/python3 1
