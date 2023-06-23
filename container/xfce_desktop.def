@@ -18,15 +18,10 @@ From: debian
     
     # install vscode
     curl -sSL https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-    add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    add-apt-repository --yes "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    add-apt-repository --yes "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
     apt update
     apt install -yq code
-
-    # install htcondor
-    wget -qO - https://research.cs.wisc.edu/htcondor/repo/keys/HTCondor-9.0-Key | apt-key add -
-    echo "deb [arch=amd64] http://research.cs.wisc.edu/htcondor/repo/debian/9.0 bullseye main" > /etc/apt/sources.list.d/htcondor.list
-    apt update
-    apt install -yq -o Dpkg::Options::="--force-confold" htcondor
 
 
     # install pycharm
