@@ -25,7 +25,8 @@ jobs:
           for def_file in container/*.def
           do
               b_name="$(basename $def_file .def)"
-              singularity build images/$b_name.sif $def_file
-              retry 4 singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:latest
-              retry 4 singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:$IMAGE_TAG
+              if singularity build images/$b_name.sif $def_file; then
+                retry 4 singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:latest
+                retry 4 singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:$IMAGE_TAG
+              fi
           done
