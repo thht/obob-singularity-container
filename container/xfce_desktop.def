@@ -9,7 +9,7 @@ From: debian
     export DEBIAN_FRONTEND=noninteractive
     apt update && apt -y full-upgrade
     # install xfce
-    apt install -yq xfce4 dbus-x11 git wget procps xfce4-goodies firefox-esr build-essential python3-cairo python3-qtpy gnupg2 software-properties-common apt-transport-https curl vim sudo libopenblas64-openmp-dev git-lfs x11-apps zsh zsh-antigen ssh-askpass libtiff6 zsh tmux screen fonts-noto-cjk
+    apt install -yq xfce4 dbus-x11 git wget procps xfce4-goodies firefox-esr build-essential python3-cairo python3-qtpy gnupg2 software-properties-common apt-transport-https curl vim sudo libopenblas64-openmp-dev git-lfs x11-apps zsh zsh-antigen ssh-askpass libtiff6 zsh tmux screen fonts-noto-cjk links links2 elinks lynx
 
     # install apptainer
     export APPTAINER_URL=$(wget -qO- 'https://api.github.com/repos/apptainer/apptainer/releases/latest' | grep '/apptainer_' | cut -d '"' -f4)
