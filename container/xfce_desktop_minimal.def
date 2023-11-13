@@ -13,6 +13,10 @@ From: debian
     # install antibody
     curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
 
+    # install gin
+    curl -o gin.deb https://gin.g-node.org/G-Node/gin-cli-releases/raw/master/gin-cli-latest.deb
+    apt install -yq ./gin.deb
+
     # make sure python works
     update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 
