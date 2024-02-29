@@ -3,9 +3,13 @@ From: debian
 
 %files
     files/00-aliases.sh /etc/profile.d/00-aliases.sh
+    files/TurboVNC.list /etc/apt/sources.list.d/TurboVNC.list
 
 %post
     export DEBIAN_FRONTEND=noninteractive
+    # install turbovnc key
+    wget -q -O- https://packagecloud.io/dcommander/turbovnc/gpgkey | gpg --dearmor >/etc/apt/trusted.gpg.d/TurboVNC.gpg
+    
     apt update && apt -y full-upgrade
     # install xfce
     apt install -yq xfce4 dbus-x11 wget procps xfce4-goodies git-lfs firefox-esr gnupg2 software-properties-common apt-transport-https curl vim sudo x11-apps ssh-askpass git zsh zsh-antigen libopenblas64-openmp-dev libtiff6  build-essential zsh tmux screen fonts-noto-cjk links links2 elinks lynx
@@ -23,8 +27,18 @@ From: debian
     # install slurm
     apt install -yq libmunge-dev libmunge2 munge slurm-wlm slurm-wlm-doc
 
+    # install turbovnc
+    apt install -yq turbovnc
+
     # make sure python works
     update-alternatives --install /usr/bin/python python /usr/bin/python3 1
+
+    # clean up
+    apt-get clean
+    rm -rf /var/lib/apt/lists/*
+
+    # set permissions for /var/run
+    chmod a+rwx /var/run /run/user /var/run/user
 
 %apprun desktop
     dbus-launch xfce4-session
