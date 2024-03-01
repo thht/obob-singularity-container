@@ -5,6 +5,9 @@ From: debian
     files/00-aliases.sh /etc/profile.d/00-aliases.sh
     files/TurboVNC.list /etc/apt/sources.list.d/TurboVNC.list
 
+%environment
+  PATH=/opt/TurboVNC/bin:$PATH
+
 %post
     export DEBIAN_FRONTEND=noninteractive
 
