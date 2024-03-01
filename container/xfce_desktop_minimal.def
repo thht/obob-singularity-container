@@ -45,6 +45,11 @@ From: debian
     # set permissions for /var/run
     chmod a+rwx /var/run /run/user /var/run/user
 
+    # create symlink to websockify
+    mkdir -p /opt/websockify
+    chmod 0755 /opt/websockify
+    ln -s /usr/bin/websockify /opt/websockify/run
+
 %apprun desktop
     dbus-launch xfce4-session
 
