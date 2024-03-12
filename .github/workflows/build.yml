@@ -25,7 +25,16 @@ jobs:
           export IMAGE_TAG=$(date +'%y%m%d%H%m')
           echo ${{ secrets.GITHUB_TOKEN }} | singularity registry login -u ${{ secrets.GHCR_USERNAME }} --password-stdin oras://ghcr.io
         
-          for def_file in container/*.def
+          for def_file in container/base/*.def
+          do
+              b_name="$(basename $def_file .def)"
+              if singularity build images/$b_name.sif $def_file; then
+                retry 4 singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:latest
+                retry 4 singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:$IMAGE_TAG
+              fi
+          done
+
+          for def_file in container/dependent/*.def
           do
               b_name="$(basename $def_file .def)"
               if singularity build images/$b_name.sif $def_file; then
