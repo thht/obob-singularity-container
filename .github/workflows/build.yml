@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: docker://quay.io/singularity/singularity:v3.9.4
+      image: docker://quay.io/singularity/singularity:v4.1.0
       options: --privileged
     steps:
       - name: Check out code for the container builds
