@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main
-      - matlab
+      - matlab_other
   schedule:
     - cron: '0 0 * * *'
 
@@ -24,7 +24,7 @@ jobs:
           source ./retry.sh
           mkdir images
           export IMAGE_TAG=$(date +'%y%m%d%H%m')
-          echo ${{ secrets.GITHUB_TOKEN }} | singularity remote login -u ${{ secrets.GHCR_USERNAME }} --password-stdin oras://ghcr.io
+          echo ${{ secrets.GITHUB_TOKEN }} | singularity registry login -u ${{ secrets.GHCR_USERNAME }} --password-stdin oras://ghcr.io
         
           for def_file in container/*.def
           do
