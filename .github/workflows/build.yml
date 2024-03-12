@@ -2,7 +2,6 @@ on:
   push:
     branches:
       - main
-      - matlab_other
   schedule:
     - cron: '0 0 * * *'
 
