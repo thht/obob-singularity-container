@@ -7,4 +7,4 @@ From: images/xfce_desktop_minimal.sif
     chmod +x mpm
     ./mpm install --release $MATLAB_RELEASE --destination /opt/matlab/$MATLAB_RELEASE --products MATLAB
 
-
+    ln -s /opt/matlab/$MATLAB_RELEASE/bin/matlab /usr/local/bin/matlab

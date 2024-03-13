@@ -1,0 +1,26 @@
+Bootstrap: localimage
+From: images/xfce_desktop_minimal.sif
+
+%post
+    export DEBIAN_FRONTEND=noninteractive
+   
+    # install vscode
+    curl -sSL https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+    add-apt-repository --yes "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    apt update
+    apt install -yq code
+
+    # install pycharm
+    export PYCHARM_VERSION=$(wget -qO- 'https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=pycharm-professional' | grep pkgver= | cut -d "=" -f2)
+    wget -O /tmp/pycharm.tar.gz https://download.jetbrains.com/python/pycharm-professional-$PYCHARM_VERSION.tar.gz
+    tar xzf /tmp/pycharm.tar.gz -C /opt/
+    mv /opt/pycharm-$PYCHARM_VERSION /opt/pycharm
+    rm -rf /tmp/pycharm.tar.gz
+
+    # clean up
+    apt-get clean
+    rm -rf /var/lib/apt/lists/*
+
+%apprun desktop
+    dbus-launch xfce4-session
+

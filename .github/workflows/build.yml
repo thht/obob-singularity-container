@@ -41,5 +41,6 @@ jobs:
               if singularity build images/$b_name.sif $def_file; then
                 retry 4 singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:latest
                 retry 4 singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:$IMAGE_TAG
+                rm images/$b_name.sif
               fi
           done

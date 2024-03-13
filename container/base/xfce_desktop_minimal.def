@@ -19,6 +19,11 @@ From: debian
     # install turbovnc key
     wget -q -O- https://packagecloud.io/dcommander/turbovnc/gpgkey | gpg --dearmor >/etc/apt/trusted.gpg.d/TurboVNC.gpg
 
+    # install apptainer
+    export APPTAINER_URL=$(wget -qO- 'https://api.github.com/repos/apptainer/apptainer/releases/latest' | grep '/apptainer_' | cut -d '"' -f4)
+    wget -O /tmp/apptainer.deb $APPTAINER_URL
+    apt install -yq /tmp/apptainer.deb
+
     # install gin
     curl -o gin.deb https://gin.g-node.org/G-Node/gin-cli-releases/raw/master/gin-cli-latest.deb
     apt install -yq ./gin.deb
