@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: ubuntu
+      image: docker://quay.io/singularity/singularity:v3.9.4
       options: --privileged
     defaults:
       run:
@@ -18,37 +18,28 @@ jobs:
     steps:
       - name: Check out code for the container builds
         uses: actions/checkout@v4
-
-      - name: Install Apptainer
-        run: |
-          export DEBIAN_FRONTEND=noninteractive
-          apt-get update
-          apt-get install -y wget
-          export APPTAINER_URL=$(wget -qO- 'https://api.github.com/repos/apptainer/apptainer/releases/latest' | grep '/apptainer_' | cut -d '"' -f4)
-          wget -O /tmp/apptainer.deb $APPTAINER_URL
-          apt install -yq /tmp/apptainer.deb
-      
+     
       - name: build
         run: |
           source ./retry.sh
           mkdir images
           export IMAGE_TAG=$(date +'%y%m%d%H%m')
-          echo ${{ secrets.GITHUB_TOKEN }} | apptainer remote login -u ${{ secrets.GHCR_USERNAME }} --password-stdin oras://ghcr.io
+          echo ${{ secrets.GITHUB_TOKEN }} | singularity remote login -u ${{ secrets.GHCR_USERNAME }} --password-stdin oras://ghcr.io
         
           for def_file in container/base/*.def
           do
               b_name="$(basename $def_file .def)"
-              if apptainer build images/$b_name.sif $def_file; then
-                retry 4 apptainer push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:latest
-                retry 4 apptainer push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:$IMAGE_TAG
+              if singularity build images/$b_name.sif $def_file; then
+                retry 4 singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:latest
+                retry 4 singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:$IMAGE_TAG
               fi
           done
 
           for def_file in container/dependent/*.def
           do
               b_name="$(basename $def_file .def)"
-              if apptainer build images/$b_name.sif $def_file; then
-                retry 4 apptainer push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:latest
-                retry 4 apptainer push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:$IMAGE_TAG
+              if singularity build images/$b_name.sif $def_file; then
+                retry 4 singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:latest
+                retry 4 singularity push images/$b_name.sif oras://ghcr.io/${GITHUB_REPOSITORY}/$b_name:$IMAGE_TAG
               fi
           done
