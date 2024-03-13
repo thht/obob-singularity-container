@@ -18,9 +18,6 @@ From: debian
 
     # install turbovnc key
     wget -q -O- https://packagecloud.io/dcommander/turbovnc/gpgkey | gpg --dearmor >/etc/apt/trusted.gpg.d/TurboVNC.gpg
-   
-    # install antibody
-    curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
 
     # install gin
     curl -o gin.deb https://gin.g-node.org/G-Node/gin-cli-releases/raw/master/gin-cli-latest.deb

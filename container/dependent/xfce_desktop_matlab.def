@@ -1,12 +1,10 @@
 Bootstrap: localimage
-From: images/xfce_desktop.sif
-
-%arguments
-    MATLAB_RELEASE=R2023b
+From: images/xfce_desktop_minimal.sif
 
 %post
+    export MATLAB_RELEASE=R2023b
     wget https://www.mathworks.com/mpm/glnxa64/mpm
     chmod +x mpm
-    ./mpm install --release {{ MATLAB_RELEASE }} --destination /opt/matlab/{{ MATLAB_RELEASE }} --products MATLAB
+    ./mpm install --release $MATLAB_RELEASE --destination /opt/matlab/$MATLAB_RELEASE --products MATLAB
 
 

@@ -41,9 +41,6 @@ From: debian
     mv /opt/pycharm-$PYCHARM_VERSION /opt/pycharm
     rm -rf /tmp/pycharm.tar.gz
 
-    # install antibody
-    curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
-
     # make sure python works
     update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 
