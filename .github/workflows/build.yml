@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: ubuntu
+      options: --privileged
     defaults:
       run:
         shell: bash
