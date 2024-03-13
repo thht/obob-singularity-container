@@ -30,6 +30,7 @@ From: debian
     apt install -yq libmunge-dev libmunge2 munge slurm-wlm slurm-wlm-doc
 
     # install turbovnc
+    apt update
     apt install -yq turbovnc
 
     # clean up
