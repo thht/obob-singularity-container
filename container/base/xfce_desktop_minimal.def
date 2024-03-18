@@ -14,7 +14,7 @@ From: debian
     
     apt update && apt -y full-upgrade
     # install xfce
-    apt install -yq xfce4 dbus-x11 wget procps xfce4-goodies git-lfs firefox-esr gnupg2 software-properties-common apt-transport-https curl vim sudo x11-apps ssh-askpass git zsh zsh-antigen libopenblas64-openmp-dev libtiff6  build-essential zsh tmux screen fonts-noto-cjk links links2 elinks lynx websockify netcat-openbsd openssh-server
+    apt install -yq xfce4 dbus-x11 wget procps xfce4-goodies git-lfs firefox-esr gnupg2 software-properties-common apt-transport-https curl vim sudo x11-apps ssh-askpass git zsh zsh-antigen libopenblas64-openmp-dev libtiff6  build-essential zsh tmux screen fonts-noto-cjk links links2 elinks lynx websockify netcat-openbsd openssh-server iputils-ping dnsutils
 
     # install turbovnc key
     wget -q -O- https://packagecloud.io/dcommander/turbovnc/gpgkey | gpg --dearmor >/etc/apt/trusted.gpg.d/TurboVNC.gpg
