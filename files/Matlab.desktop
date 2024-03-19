@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Matlab
+Comment=
+Exec=/usr/local/bin/matlab -desktop
+Icon=/usr/share/icons/matlab_icon.png
+Path=
+Terminal=false
+StartupNotify=false

@@ -1,6 +1,9 @@
 Bootstrap: localimage
 From: images/xfce_desktop_minimal.sif
 
+%files
+    files/Matlab.desktop /usr/share/applications/Matlab.desktop
+
 %post
     export MATLAB_RELEASE=R2023b
     wget https://www.mathworks.com/mpm/glnxa64/mpm
@@ -8,3 +11,4 @@ From: images/xfce_desktop_minimal.sif
     ./mpm install --release $MATLAB_RELEASE --destination /opt/matlab/$MATLAB_RELEASE --products MATLAB Audio_Toolbox Bioinformatics_Toolbox Computer_Vision_Toolbox Curve_Fitting_Toolbox DSP_System_Toolbox Deep_Learning_Toolbox Global_Optimization_Toolbox Image_Processing_Toolbox Optimization_Toolbox Signal_Processing_Toolbox Statistics_and_Machine_Learning_Toolbox
 
     ln -s /opt/matlab/$MATLAB_RELEASE/bin/matlab /usr/local/bin/matlab
+    ln -s /opt/matlab/$MATLAB_RELEASE/bin/glnxa64/cef_resources/matlab_icon.png /usr/share/icons/matlab_icon.png
