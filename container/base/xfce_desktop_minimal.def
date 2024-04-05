@@ -4,6 +4,7 @@ From: debian
 %files
     files/00-aliases.sh /etc/profile.d/00-aliases.sh
     files/TurboVNC.list /etc/apt/sources.list.d/TurboVNC.list
+    files/history.sh /etc/profile.d/history.sh
 
 %environment
   PATH=/opt/TurboVNC/bin:$PATH
