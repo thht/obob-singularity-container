@@ -5,7 +5,7 @@ From: images/xfce_desktop_minimal.sif
     files/Matlab.desktop /usr/share/applications/Matlab.desktop
 
 %post
-    export MATLAB_RELEASE=R2024a
+    export MATLAB_RELEASE=R2023b
     wget https://www.mathworks.com/mpm/glnxa64/mpm
     chmod +x mpm
     ./mpm install --release $MATLAB_RELEASE --destination /opt/matlab/$MATLAB_RELEASE --products MATLAB Audio_Toolbox Bioinformatics_Toolbox Computer_Vision_Toolbox Curve_Fitting_Toolbox DSP_System_Toolbox Deep_Learning_Toolbox Global_Optimization_Toolbox Image_Processing_Toolbox Optimization_Toolbox Signal_Processing_Toolbox Statistics_and_Machine_Learning_Toolbox
