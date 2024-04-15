@@ -14,6 +14,7 @@ From: images/xfce_desktop_minimal.sif
     ln -s /opt/matlab/$MATLAB_RELEASE/bin/glnxa64/cef_resources/matlab_icon.png /usr/share/icons/matlab_icon.png
 
     # install stuff for ptb
+    apt update
     apt -yq build-dep psychtoolbox-3
 
     # clean up
