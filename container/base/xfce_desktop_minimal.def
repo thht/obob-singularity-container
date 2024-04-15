@@ -15,6 +15,9 @@ From: debian
 
 %post
     export DEBIAN_FRONTEND=noninteractive
+
+    # add src repos
+    find /etc/apt/sources.list.d/ -type f -name "*.sources" -exec sed -i '/^Types: deb$/ s/$/ deb-src/' {} \;
     
     apt update && apt -y full-upgrade
     # install xfce
