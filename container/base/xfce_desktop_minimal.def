@@ -4,6 +4,7 @@ From: debian
 %files
     files/00-aliases.sh /etc/profile.d/00-aliases.sh
     files/TurboVNC.list /etc/apt/sources.list.d/TurboVNC.list
+    files/VirtualGL.list /etc/apt/sources.list.d/VirtualGL.list
     files/history.sh /etc/profile.d/history.sh
 
 %environment
@@ -20,8 +21,9 @@ From: debian
     # install xfce
     apt install -yq xfce4 dbus-x11 wget procps xfce4-goodies git-lfs firefox-esr gnupg2 software-properties-common apt-transport-https curl vim sudo x11-apps ssh-askpass git zsh zsh-antigen libopenblas64-openmp-dev libtiff6  build-essential zsh tmux screen fonts-noto-cjk links links2 elinks lynx websockify netcat-openbsd openssh-server iputils-ping dnsutils locales-all rclone rsync pipx python3-pip python3-dev libgl1-mesa-glx xvfb
 
-    # install turbovnc key
+    # install turbovnc and virtualgl keys
     wget -q -O- https://packagecloud.io/dcommander/turbovnc/gpgkey | gpg --dearmor >/etc/apt/trusted.gpg.d/TurboVNC.gpg
+    wget -q -O- https://packagecloud.io/dcommander/virtualgl/gpgkey | gpg --dearmor >/etc/apt/trusted.gpg.d/VirtualGL.gpg
 
     # install apptainer
     export APPTAINER_URL=$(wget -qO- 'https://api.github.com/repos/apptainer/apptainer/releases/latest' | grep '/apptainer_' | cut -d '"' -f4)
@@ -45,6 +47,9 @@ From: debian
     # install nix
     curl -o nix_install.sh -L https://nixos.org/nix/install
     sh nix_install.sh --daemon
+
+    # add virtualgl
+    apt install -yq virtualgl
 
     # clean up
     apt-get clean
