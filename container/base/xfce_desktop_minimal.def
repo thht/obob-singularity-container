@@ -28,10 +28,6 @@ From: debian
     wget -O /tmp/apptainer.deb $APPTAINER_URL
     apt install -yq /tmp/apptainer.deb
 
-    # install gin
-    curl -o gin.deb https://gin.g-node.org/G-Node/gin-cli-releases/raw/master/gin-cli-latest.deb
-    apt install -yq ./gin.deb
-
     # make sure python works
     update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 
@@ -45,6 +41,9 @@ From: debian
     # install nix
     curl -o nix_install.sh -L https://nixos.org/nix/install
     sh nix_install.sh --daemon
+
+    # install code-server
+    curl -fsSL https://code-server.dev/install.sh | sh
 
     # clean up
     apt-get clean
