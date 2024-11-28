@@ -2,8 +2,6 @@ on:
   push:
     branches:
       - codeserver
-  schedule:
-    - cron: '0 0 * * *'
 
 jobs:
   build:
