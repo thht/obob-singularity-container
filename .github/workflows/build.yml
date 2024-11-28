@@ -1,7 +1,6 @@
 on:
   push:
     branches:
-      - main
       - codeserver
   schedule:
     - cron: '0 0 * * *'
