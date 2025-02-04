@@ -34,6 +34,9 @@ From: debian
     # install munge
     apt install -yq libmunge-dev libmunge2 munge build-essential fakeroot devscripts equivs
 
+    # add slurm user
+    useradd -r -U -d /etc/slurm -s /bin/false slurm
+    
     # install slurm
     mkdir -p /tmp/slurm_install
     wget -O /tmp/slurm_install/slurm.tar.bz2 https://download.schedmd.com/slurm/slurm-23.11-latest.tar.bz2
