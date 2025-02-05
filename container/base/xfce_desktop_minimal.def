@@ -31,8 +31,25 @@ From: debian
     # make sure python works
     update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 
+    # install munge
+    apt install -yq libmunge-dev libmunge2 munge build-essential fakeroot devscripts equivs
+
+    # add slurm user
+    useradd -r -U -d /etc/slurm -s /bin/false slurm
+    
     # install slurm
-    apt install -yq libmunge-dev libmunge2 munge slurm-wlm slurm-wlm-doc
+    mkdir -p /tmp/slurm_install
+    wget -O /tmp/slurm_install/slurm.tar.bz2 https://download.schedmd.com/slurm/slurm-23.11-latest.tar.bz2
+    current_dir=$(pwd)
+    tar -xvf /tmp/slurm_install/slurm.tar.bz2 -C /tmp/slurm_install
+    cd /tmp/slurm_install/slurm-*
+    mk-build-deps --install --tool='apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes' debian/control
+    debuild -b -uc -us
+    apt install -yq /tmp/slurm_install/slurm-smd_*.deb /tmp/slurm_install/slurm-smd-client_*.deb
+    cd $current_dir
+    rm -rf /tmp/slurm_install
+
+
 
     # install turbovnc
     apt update
